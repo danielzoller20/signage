@@ -5,20 +5,20 @@ autoinstall:
    - identity
   locale: "de_CH.UTF-8"
   keyboard:
-    layout: "swiss german"
+   layout: "swiss german"
   source:
-    search_drivers: true
-    id: ubuntu-desktop-minimal
+   search_drivers: true
+   id: ubuntu-desktop-minimal
   ssh:
-    install-server: true
-    allow-pw: true
+   install-server: true
+   allow-pw: true
   drivers:
-    install: true
+   install: true
   packages:
-    - openssh-server
+   - openssh-server
   timezone: "Europe/Zurich"
   updates: all
   shutdown: reboot
   late-commands:
-    - curtin in-target -- apt-get update
-    - curtin in-target -- apt -y upgrade
+   - curtin in-target -- apt-get update
+   - curtin in-target -- apt -y upgrade
