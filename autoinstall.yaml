@@ -20,3 +20,6 @@ autoinstall:
   timezone: "Europe/Zurich"
   updates: all
   shutdown: reboot
+  late-commands:
+    - curtin in-target -- apt-get update
+    - curtin in-target -- apt -y upgrade
