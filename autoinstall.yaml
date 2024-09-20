@@ -1,0 +1,24 @@
+autoinstall:
+  version: 1
+  interactive-sections:
+    - network
+  identity:
+    username: SignageUser
+    password: 'SignageUserPass'
+    hostname: UbuntuSignage
+  locale: "de_CH.UTF-8"
+  keyboard:
+    layout: "swiss german"
+  source:
+    search_drivers: true
+    id: ubuntu-desktop-minimal
+  ssh:
+    install-server: true
+    allow-pw: true
+  drivers:
+    install: true
+  packages:
+    - openssh-server
+  timezone: "Europe/Zurich"
+  updates: all
+  shutdown: reboot
