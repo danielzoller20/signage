@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# install xdotool for input
-apt -y install xdotool
-
-# install openssh-server for maintenance
-apt -y install openssh-server
-
-
-
 ## changes to run unattended-upgrades
 
 # Backup the original file before making changes
@@ -23,7 +15,6 @@ sed -i 's|//Unattended-Upgrade::Automatic-Reboot "false";|Unattended-Upgrade::Au
 sed -i 's|//Unattended-Upgrade::Automatic-Reboot-WithUsers "true";|Unattended-Upgrade::Automatic-Reboot-WithUsers "true";\nUnattended-Upgrade::Automatic-Reboot "true";|' /etc/apt/apt.conf.d/50unattended-upgrades
 
 
-
 # Create folder /signage
 mkdir /signage
 
@@ -34,30 +25,15 @@ output_file="/signage/firefox_script.sh"
 cat << 'EOF' > $output_file
 #!/bin/bash
 
-# Define the URL
-#URL="http://10.42.5.50/"
-URL="https://www.schule-rorschacherberg.ch"
+# Define the startup URL
+URL="www.enterstartupURLhere.com"
 
 # Start Firefox and open the URL
 firefox --kiosk "$URL" &
-
-# Wait for Firefox to launch
-sleep 5
-
-# Use xdotool to press F11 to make Firefox fullscreen
-xdotool search --sync --onlyvisible --class "firefox" windowactivate key F11
-
-# Wait for the page to load
-sleep 2
-
-# Automatically type the password if a password field is focused
-xdotool type "TopSecretScreen!"
-xdotool key Return
 EOF
 
 # Make the output file executable
 chmod +x $output_file
-
 
 
 # add CronJob for updates at night
