@@ -3,6 +3,10 @@ autoinstall:
   version: 1
   interactive-sections:
    - network
+  storage:
+   layout:
+    name: lvm
+    policy: all
   user-data:
     users: ['']
   locale: "de_CH.UTF-8"
