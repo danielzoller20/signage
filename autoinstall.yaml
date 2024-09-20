@@ -1,8 +1,10 @@
+#cloud-config
 autoinstall:
   version: 1
   interactive-sections:
    - network
-   - identity
+  user-data:
+    users: ['']
   locale: "de_CH.UTF-8"
   keyboard:
    layout: "swiss german"
