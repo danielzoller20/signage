@@ -1,9 +1,8 @@
 autoinstall:
   version: 1
   interactive-sections:
-    - network
-  identity:
-    username: SignageUser
+   - network
+   - identity
   locale: "de_CH.UTF-8"
   keyboard:
     layout: "swiss german"
