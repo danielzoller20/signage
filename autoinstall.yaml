@@ -11,7 +11,7 @@ autoinstall:
   users: ['']
  locale: "de_CH.UTF-8"
  keyboard:
-  layout: "swiss german"
+  layout: "ch"
  source:
   search_drivers: true
   id: ubuntu-desktop-minimal
