@@ -8,7 +8,7 @@ autoinstall:
    name: lvm
    policy: all
  user-data:
-   users: ['']
+  users: ['']
  locale: "de_CH.UTF-8"
  keyboard:
   layout: "swiss german"
