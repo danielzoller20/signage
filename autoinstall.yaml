@@ -1,8 +1,6 @@
 #cloud-config
 autoinstall:
  version: 1
- interactive-sections:
-  - network
  storage:
   layout:
    name: lvm
@@ -26,5 +24,8 @@ autoinstall:
  updates: all
  shutdown: reboot
  late-commands:
-  - curtin in-target -- apt-get update
+  - curtin in-target -- apt update
   - curtin in-target -- apt -y upgrade
+  - curtin in-target -- wget https://raw.githubusercontent.com/danielzoller20/signage/main/install_asRoot.sh -O /tmp/install_asRoot.sh
+  - curtin in-target -- /bin/bash /tmp/install_asRoot.sh
+  - curtin in-target -- wget https://raw.githubusercontent.com/danielzoller20/signage/main/install_asUser.sh -O /tmp/install_asUser.sh
