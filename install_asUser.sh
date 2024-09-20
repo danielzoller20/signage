@@ -26,8 +26,8 @@ Exec=/signage/firefox_script.sh
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name=Firefox Script
-Comment=Run Firefox script at startup
+Name=Start Browser
+Comment=Run Firefox as specified in /signage/firefox_startup.sh
 EOF
 
 echo "Autostart entry created for Firefox script."
