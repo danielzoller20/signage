@@ -4,8 +4,6 @@ autoinstall:
     - network
   identity:
     username: SignageUser
-    password: 'SignageUserPass'
-    hostname: UbuntuSignage
   locale: "de_CH.UTF-8"
   keyboard:
     layout: "swiss german"
