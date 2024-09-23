@@ -7,7 +7,8 @@
 ```mkdir /tmp/mountfolder
 mount ./ubuntu.iso /tmp/mountfolder
 mkdir /tmp/ubuntufolder
-rsync -a /tmp/mountfolder /tmp/ubuntufolder```
+rsync -a /tmp/mountfolder /tmp/ubuntufolder
+```
 
 copy autoinstall.yaml to /tmp/ubuntufoolder
 
@@ -17,7 +18,8 @@ copy autoinstall.yaml to /tmp/ubuntufoolder
         set gfxpayload=keep
         linux /casper/vmlinuz --- autoinstall ds=nocloud-net;s=file:///cdrom/autoinstall.yaml
         initrd /casper/initrd
-}```
+}
+```
 
 ## create new .iso
 
@@ -29,4 +31,5 @@ copy autoinstall.yaml to /tmp/ubuntufoolder
   -eltorito-alt-boot \
   -e EFI/boot/bootx64.efi \
   -no-emul-boot -isohybrid-gpt-basdat \
-  -o ubuntu-autoinstall.iso /tmp/ubuntufolder```
+  -o ubuntu-autoinstall.iso /tmp/ubuntufolder
+  ```
