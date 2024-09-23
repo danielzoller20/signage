@@ -4,7 +4,8 @@
 - grub.cfg is changed
 
 ## copy iso to folder
-```mkdir /tmp/mountfolder
+```
+mkdir /tmp/mountfolder
 mount ./ubuntu.iso /tmp/mountfolder
 mkdir /tmp/ubuntufolder
 rsync -a /tmp/mountfolder /tmp/ubuntufolder
@@ -14,7 +15,8 @@ copy autoinstall.yaml to /tmp/ubuntufoolder
 
 ## edit /tmp/ubuntufolder/boot/grub/grub.cfg
 
-```menuentry "Autoinstall Ubuntu Signage" {
+```
+menuentry "Autoinstall Ubuntu Signage" {
         set gfxpayload=keep
         linux /casper/vmlinuz --- autoinstall ds=nocloud-net;s=file:///cdrom/autoinstall.yaml
         initrd /casper/initrd
@@ -22,8 +24,10 @@ copy autoinstall.yaml to /tmp/ubuntufoolder
 ```
 
 ## create new .iso
+xorriso needs to be installed.
 
-```xorriso -as mkisofs \
+```
+xorriso -as mkisofs \
   -r -V "ubuntu-autoinstall" \
   -J -joliet-long \
   -b boot/grub/i386-pc/eltorito.img \
