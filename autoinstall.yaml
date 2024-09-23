@@ -28,4 +28,5 @@ autoinstall:
   - curtin in-target -- apt -y upgrade
   - curtin in-target -- wget https://raw.githubusercontent.com/danielzoller20/signage/main/install_asRoot.sh -O /tmp/install_asRoot.sh
   - curtin in-target -- /bin/bash /tmp/install_asRoot.sh
-  - curtin in-target -- wget https://raw.githubusercontent.com/danielzoller20/signage/main/install_asUser.sh -O /tmp/install_asUser.sh
+  - curtin in-target -- wget https://raw.githubusercontent.com/danielzoller20/signage/main/install_asUser.sh -O /signage/install_asUser.sh
+  - curtin in-target -- chmod +x /signage/install_asUser.sh 
