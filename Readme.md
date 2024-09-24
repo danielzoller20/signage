@@ -8,13 +8,23 @@
 mkdir /tmp/mountfolder
 mount ./ubuntu.iso /tmp/mountfolder
 mkdir /tmp/ubuntufolder
-rsync -a /tmp/mountfolder /tmp/ubuntufolder
+rsync -a /tmp/mountfolder/ /tmp/ubuntufolder
 ```
 
 copy autoinstall.yaml to /tmp/ubuntufoolder
+```
+wget -O /tmp/ubuntufolder/autoinstall.yaml https://raw.githubusercontent.com/danielzoller20/signage/main/autoinstall.yaml
+```
 
-## edit /tmp/ubuntufolder/boot/grub/grub.cfg
+## add menuentry to grub
+grub.cfg seems to have permissions 444.
+need to change at least to 644 to change.
 
+```
+chmod 644 /tmp/ubuntufolder/boot/grub/grub.cfg
+nano /tmp/ubuntufolder/boot/grub/grub.cfg
+```
+add these lines
 ```
 menuentry "Autoinstall Ubuntu Signage" {
         set gfxpayload=keep
