@@ -14,6 +14,26 @@ sed -i 's|//Unattended-Upgrade::Automatic-Reboot "false";|Unattended-Upgrade::Au
 # Change Unattended-Upgrade::Automatic-Reboot-WithUsers and add Automatic-Reboot "true"
 sed -i 's|//Unattended-Upgrade::Automatic-Reboot-WithUsers "true";|Unattended-Upgrade::Automatic-Reboot-WithUsers "true";\nUnattended-Upgrade::Automatic-Reboot "true";|' /etc/apt/apt.conf.d/50unattended-upgrades
 
+# Change release-upgrade to never
+
+# Path to the release-upgrades file
+CONFIG_FILE="/etc/update-manager/release-upgrades"
+
+# Check if the file exists
+if [ -f "$CONFIG_FILE" ]; then
+  # Use sed to find and replace the line starting with Prompt= and change it to Prompt=never
+  sudo sed -i 's/^Prompt=.*/Prompt=never/' "$CONFIG_FILE"
+  
+  # If the Prompt line does not exist, add it to the file
+  if ! grep -q "^Prompt=never" "$CONFIG_FILE"; then
+    echo "Prompt=never" | sudo tee -a "$CONFIG_FILE"
+  fi
+
+  echo "Updated $CONFIG_FILE to set Prompt=never."
+else
+  echo "Configuration file not found at $CONFIG_FILE."
+fi
+
 
 # Create folder /signage
 mkdir /signage
