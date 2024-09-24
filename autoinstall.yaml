@@ -20,7 +20,7 @@ autoinstall:
   install: true
  packages:
   - openssh-server
- timezone: "Europe/Zurich"
+ timezone: Europe/Zurich
  updates: all
  shutdown: reboot
  late-commands:
