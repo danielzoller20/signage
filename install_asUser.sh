@@ -12,6 +12,14 @@ gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 
 
+## Configure remote-access
+settings set org.gnome.desktop.remote-desktop.rdp enable true
+# password from keyring needs to be removed!
+# otherwise rdp-password wont persist
+# rdp-password needs to be specified in settings 
+
+
+## Firefox-Autostart
 
 mkdir -p ~/.config/autostart
 
@@ -31,6 +39,8 @@ Comment=Run Firefox as specified in /signage/firefox_startup.sh
 EOF
 
 echo "Autostart entry created for Firefox script."
+
+# Autologin
 
 # Define the output file path
 output_file="/etc/gdm3/custom.conf"
