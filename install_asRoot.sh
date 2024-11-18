@@ -14,7 +14,7 @@ sed -i 's|//Unattended-Upgrade::Automatic-Reboot "false";|Unattended-Upgrade::Au
 # Change Unattended-Upgrade::Automatic-Reboot-WithUsers and add Automatic-Reboot "true"
 sed -i 's|//Unattended-Upgrade::Automatic-Reboot-WithUsers "true";|Unattended-Upgrade::Automatic-Reboot-WithUsers "true";\nUnattended-Upgrade::Automatic-Reboot "true";|' /etc/apt/apt.conf.d/50unattended-upgrades
 
-# Change release-upgrade to never
+## Change release-upgrade to never
 
 # Path to the release-upgrades file
 CONFIG_FILE="/etc/update-manager/release-upgrades"
@@ -33,6 +33,19 @@ if [ -f "$CONFIG_FILE" ]; then
 else
   echo "Configuration file not found at $CONFIG_FILE."
 fi
+
+## Updates
+
+# add CronJob for updates at night
+
+# Define the cron job schedule and update command
+CRON_SCHEDULE="0 2 * * *"
+COMMAND="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+
+# Check if the cron job already exists
+CRON_JOB="$CRON_SCHEDULE $COMMAND"
+(crontab -l 2>/dev/null | grep -F "$COMMAND") || (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
+
 
 ## Firefox-Autostart
 
@@ -55,16 +68,3 @@ EOF
 
 # Make the output file executable
 chmod +x $output_file
-
-
-## Updates
-
-# add CronJob for updates at night
-
-# Define the cron job schedule and update command
-CRON_SCHEDULE="0 2 * * *"
-COMMAND="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
-
-# Check if the cron job already exists
-CRON_JOB="$CRON_SCHEDULE $COMMAND"
-(crontab -l 2>/dev/null | grep -F "$COMMAND") || (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
