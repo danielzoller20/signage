@@ -63,7 +63,7 @@ cat << 'EOF' > $output_file
 URL="www.enterstartupURLhere.com"
 
 # Start Firefox and open the URL
-firefox --kiosk "$URL" &
+latpak run org.mozilla.firefox --kiosk "$URL" &
 EOF
 
 # Make the output file executable
@@ -83,7 +83,26 @@ cat << 'EOF' > $output_file
 URL="www.enterstartupURLhere.com"
 
 # Start Chromium and open the URL
-chromium --app --start-fullscreen "$URL"
+flatpak run org.chromium.Chromium --app --start-fullscreen "$URL"
+EOF
+
+# Make the output file executable
+chmod +x $output_file
+
+## Chrome-Autostart
+
+# Define the output file path
+output_file="/signage/chrome_script.sh"
+
+# Write the content to the file
+cat << 'EOF' > $output_file
+#!/bin/bash
+
+# Define the startup URL
+URL="www.enterstartupURLhere.com"
+
+# Start Chrome and open the URL
+flatpak run com.google.Chrome --app --start-fullscreen "$URL"
 EOF
 
 # Make the output file executable

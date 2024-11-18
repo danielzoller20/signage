@@ -20,11 +20,15 @@ autoinstall:
   install: true
  packages:
   - openssh-server
-  - chromium-browser
+  - flatpak
  timezone: Europe/Zurich
  updates: all
  shutdown: reboot
  late-commands:
+  - curtin in-target -- flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  - curtin in-target -- flatpak -y install flathub org.mozilla.firefox
+  - curtin in-target -- flatpak -y install flathub com.google.Chrome
+  - curtin in-target -- flatpak -y install flathub org.chromium.Chromium
   - curtin in-target -- apt update
   - curtin in-target -- apt -y upgrade
   - curtin in-target -- wget https://raw.githubusercontent.com/danielzoller20/signage/main/install_asRoot.sh -O /tmp/install_asRoot.sh
