@@ -68,3 +68,23 @@ EOF
 
 # Make the output file executable
 chmod +x $output_file
+
+
+## Chromium-Autostart
+
+# Define the output file path
+output_file="/signage/chromium_script.sh"
+
+# Write the content to the file
+cat << 'EOF' > $output_file
+#!/bin/bash
+
+# Define the startup URL
+URL="www.enterstartupURLhere.com"
+
+# Start Chromium and open the URL
+chromium --app --start-fullscreen "$URL"
+EOF
+
+# Make the output file executable
+chmod +x $output_file

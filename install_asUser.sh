@@ -31,15 +31,15 @@ output_file="$HOME/.config/autostart/firefox_startup.desktop"
 cat << EOF > $output_file
 [Desktop Entry]
 Type=Application
-Exec=/signage/firefox_script.sh
+Exec=/signage/chromium_script.sh
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
 Name=Start Browser
-Comment=Run Firefox as specified in /signage/firefox_startup.sh
+Comment=Run browser as specified in exec-script
 EOF
 
-echo "Autostart entry created for Firefox script."
+echo "Autostart entry created for browser script."
 
 
 ## Autologin
