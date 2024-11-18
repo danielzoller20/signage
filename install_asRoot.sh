@@ -63,7 +63,7 @@ cat << 'EOF' > $output_file
 URL="www.enterstartupURLhere.com"
 
 # Start Firefox and open the URL
-latpak run org.mozilla.firefox --kiosk "$URL" &
+flatpak run org.mozilla.firefox --kiosk "$URL" &
 EOF
 
 # Make the output file executable
