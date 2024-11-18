@@ -54,16 +54,19 @@ xorriso -as mkisofs \
 Script from https://raw.githubusercontent.com/danielzoller20/signage/main/install_asRoot.sh gets copied to device (/tmp).
 In this script:
 - Update-Settings are made,
-- Cronjob for updates at 02.00 PM is set up
+- Cronjob for updates at 02.00 PM is set up,
+- Files are created, where the URL of the screen has to be specified,
 - Script for autostart of firefox is generated in /signage.
+
 Script runs automatically during autoinstall.
 
-Script from https://raw.githubusercontent.com/danielzoller20/signage/main/install_asUser.sh gets copied to device (/tmp).
+Script from https://raw.githubusercontent.com/danielzoller20/signage/main/install_asUser.sh gets copied to device (/signage).
 In this script:
 - Energy settings are adjustet to prevent disabling of screen,
 - RDP is enabled for remote access,
 - Firefox is added to autostart,
 - Autologin is configured.
+
 Script needs to be run as User!
 
 ### needs to be done in GUI:
