@@ -34,6 +34,7 @@ else
   echo "Configuration file not found at $CONFIG_FILE."
 fi
 
+## Firefox-Autostart
 
 # Create folder /signage
 mkdir /signage
@@ -55,6 +56,8 @@ EOF
 # Make the output file executable
 chmod +x $output_file
 
+
+## Updates
 
 # add CronJob for updates at night
 
