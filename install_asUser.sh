@@ -14,6 +14,7 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 
 ## Configure remote-access
 gsettings set org.gnome.desktop.remote-desktop.rdp enable true
+gsettings set org.gnome.desktop.remote-desktop.rdp view-only false
 # password from keyring needs to be removed!
 # otherwise rdp-password wont persist
 # rdp-password needs to be specified in settings 
