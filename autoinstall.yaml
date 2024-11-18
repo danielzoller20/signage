@@ -20,6 +20,7 @@ autoinstall:
   install: true
  packages:
   - openssh-server
+  - chromium-browser
  timezone: Europe/Zurich
  updates: all
  shutdown: reboot
