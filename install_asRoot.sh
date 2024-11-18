@@ -68,8 +68,3 @@ COMMAND="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 # Check if the cron job already exists
 CRON_JOB="$CRON_SCHEDULE $COMMAND"
 (crontab -l 2>/dev/null | grep -F "$COMMAND") || (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
-
-username=$(awk -F: '($3 >= 1000) && ($1 != "nobody") {print $1; exit}' /etc/passwd)
-
-# run userscript
-su $username /signage/install_asUser.sh
