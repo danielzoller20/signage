@@ -83,7 +83,7 @@ cat << 'EOF' > $output_file
 URL="www.enterstartupURLhere.com"
 
 # Start Chromium and open the URL
-flatpak run org.chromium.Chromium --app --start-fullscreen "$URL"
+flatpak run org.chromium.Chromium --app --start-fullscreen --disable-infobars --disable-session-crashed-bubble "$URL"
 EOF
 
 # Make the output file executable
@@ -102,7 +102,7 @@ cat << 'EOF' > $output_file
 URL="www.enterstartupURLhere.com"
 
 # Start Chrome and open the URL
-flatpak run com.google.Chrome --app --start-fullscreen "$URL"
+flatpak run com.google.Chrome --app --start-fullscreen --disable-infobars --hide-crash-restore-bubble "$URL"
 EOF
 
 # Make the output file executable
