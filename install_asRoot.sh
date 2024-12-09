@@ -1,5 +1,14 @@
 #!/bin/bash
 
+###########################################################################
+# script to adjust ubuntu 24.04 for signage
+###########################################################################
+
+
+###########################################################################
+# updates
+###########################################################################
+
 ## changes to run unattended-upgrades
 
 # Backup the original file before making changes
@@ -14,7 +23,8 @@ sed -i 's|//Unattended-Upgrade::Automatic-Reboot "false";|Unattended-Upgrade::Au
 # Change Unattended-Upgrade::Automatic-Reboot-WithUsers and add Automatic-Reboot "true"
 sed -i 's|//Unattended-Upgrade::Automatic-Reboot-WithUsers "true";|Unattended-Upgrade::Automatic-Reboot-WithUsers "true";\nUnattended-Upgrade::Automatic-Reboot "true";|' /etc/apt/apt.conf.d/50unattended-upgrades
 
-## Change release-upgrade to never
+
+## change release-upgrade to never
 
 # Path to the release-upgrades file
 CONFIG_FILE="/etc/update-manager/release-upgrades"
@@ -34,12 +44,7 @@ else
   echo "Configuration file not found at $CONFIG_FILE."
 fi
 
-## Updates
-
-apt update
-apt -y upgrade
-
-# add CronJob for updates at night
+## add CronJob for updates at night
 
 # Define the cron job schedule and update command
 CRON_SCHEDULE="0 2 * * *"
@@ -48,6 +53,16 @@ COMMAND="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 # Check if the cron job already exists
 CRON_JOB="$CRON_SCHEDULE $COMMAND"
 (crontab -l 2>/dev/null | grep -F "$COMMAND") || (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
+
+## Updates
+
+apt update
+apt -y upgrade
+
+
+###########################################################################
+# installation of packages
+###########################################################################
 
 # install openssh and flatpak
 apt -y install openssh-server
@@ -60,8 +75,11 @@ flatpak -y install flathub com.google.Chrome
 flatpak -y install flathub org.chromium.Chromium
 
 
-## Firefox-Autostart
+###########################################################################
+# startup-scripts for browsers
+###########################################################################
 
+## Firefox
 # Create folder /signage
 mkdir /signage
 
@@ -83,8 +101,7 @@ EOF
 chmod +x $output_file
 
 
-## Chromium-Autostart
-
+## Chromium
 # Define the output file path
 output_file="/signage/chromium_script.sh"
 
@@ -102,8 +119,7 @@ EOF
 # Make the output file executable
 chmod +x $output_file
 
-## Chrome-Autostart
-
+## Chrome
 # Define the output file path
 output_file="/signage/chrome_script.sh"
 
@@ -122,6 +138,68 @@ EOF
 chmod +x $output_file
 
 
-# get script for energysettings
+###########################################################################
+# set dhcp-identifier to mac for dhcp lease reservation
+###########################################################################
+
+## new file to disable cloud-init network configuration
+
+# Define the output file path
+output_file="/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"
+
+# Write the content to the file
+cat << 'EOF' > $output_file
+network: {config: disabled}
+EOF
+
+# Make output file readable
+chmod 644 $output_file
+
+
+## add dhcp-identifier: mac to netplan
+
+# Define the directory where the YAML file is located
+input_dir="/etc/netplan"
+
+# Find the YAML file in the specified directory
+input_file=$(find "$input_dir" -name "*.yaml" | head -n 1)
+
+# Check if a YAML file was found
+if [[ -z "$input_file" ]]; then
+    echo "No YAML file found in $input_dir."
+fi
+
+# Create a temporary file to store the modified content
+temp_file=$(mktemp)
+
+# Read the input file line by line
+while IFS= read -r line; do
+    # Print the current line to the temp file
+    echo "$line" >> "$temp_file"
+    
+    # Check if the line contains "dhcp4: true"
+    if [[ "$line" == *"dhcp4: true"* ]]; then
+        # Get the leading spaces using awk
+        leading_spaces=$(echo "$line" | awk '{print substr($0, 1, match($0, /[^ ]/) - 1)}')
+        
+        # Add the new line with the same leading spaces
+        echo "${leading_spaces}dhcp-identifier: mac" >> "$temp_file"
+    fi
+done < "$input_file"
+
+# Move the temp file to the original file
+mv "$temp_file" "$input_file"
+
+echo "Updated $input_file successfully."
+
+# apply changes
+netplan apply
+
+
+###########################################################################
+# get script for energy settings and autostart
+###########################################################################
+
+# script must be executed as user
 wget https://raw.githubusercontent.com/danielzoller20/signage/main/install_asUser.sh -O /signage/install_asUser.sh
 chmod +x /signage/install_asUser.sh
