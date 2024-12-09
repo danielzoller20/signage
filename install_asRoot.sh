@@ -36,6 +36,9 @@ fi
 
 ## Updates
 
+apt update
+apt -y upgrade
+
 # add CronJob for updates at night
 
 # Define the cron job schedule and update command
@@ -45,6 +48,16 @@ COMMAND="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 # Check if the cron job already exists
 CRON_JOB="$CRON_SCHEDULE $COMMAND"
 (crontab -l 2>/dev/null | grep -F "$COMMAND") || (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
+
+# install openssh and flatpak
+apt -y install openssh-server
+apt -y install flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+# install browsers from flathub
+flatpak -y install flathub org.mozilla.firefox
+flatpak -y install flathub com.google.Chrome
+flatpak -y install flathub org.chromium.Chromium
 
 
 ## Firefox-Autostart
@@ -107,3 +120,8 @@ EOF
 
 # Make the output file executable
 chmod +x $output_file
+
+
+# get script for energysettings
+wget https://raw.githubusercontent.com/danielzoller20/signage/main/install_asUser.sh -O /signage/install_asUser.sh
+chmod +x /signage/install_asUser.sh
