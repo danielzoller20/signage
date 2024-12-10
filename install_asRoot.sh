@@ -194,7 +194,7 @@ echo "Updated $input_file successfully."
 
 # apply changes
 netplan apply
-
+sleep 5
 
 ###########################################################################
 # get script for energy settings and autostart
