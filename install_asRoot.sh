@@ -48,7 +48,7 @@ fi
 
 # Define the cron job schedule and update /shutdown command for 20.45 mon-fri
 CRON_SCHEDULE="45 20 * * 1-5"
-COMMAND="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && shutdown now"
+COMMAND="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo shutdown now"
 
 # Check if the cron job already exists
 CRON_JOB="$CRON_SCHEDULE $COMMAND"
