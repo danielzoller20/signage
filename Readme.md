@@ -32,4 +32,4 @@ Script needs to be run as User!
 ## needs to be done in GUI:
 - Password for RDP needs to be specified ![specify Password](/img/password.png)
 - Password for keyring needs to be removed (otherwise RDP-PW changes) ![remove Password for Keyring](/img/keyring.png)
-- Gnome Extension hide-cursor@elcste.com needs to be installed [Extension Manager](/img/HideCursor1.png) [search](/img/HideCursor2.png) [HideCursor](/img/HideCursor3.png)
+- Gnome Extension hide-cursor@elcste.com needs to be installed ![Extension Manager](/img/HideCursor1.png) ![search](/img/HideCursor2.png) ![HideCursor](/img/HideCursor3.png)
