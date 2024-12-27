@@ -10,9 +10,9 @@ sudo /bin/bash /tmp/install_asRoot.sh
 ```
 In the script "install_asRoot.sh":
 - Update-Settings are made,
-- Cronjob for updates at 02.00 PM is set up,
-- Files are created, where the URL of the screen has to be specified,
-- Script for autostart of firefox is generated in /signage,
+- Cronjob for updates & shutdown is set up,
+- Packages and Flatpaks are installed,
+- Scripts for autostart of browsers are generated in /signage,
 - Changes to Netplan are applied,
 - Script to run as user gets copied to /signage.
 
