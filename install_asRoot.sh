@@ -75,7 +75,7 @@ flatpak -y install flathub com.google.Chrome
 flatpak -y install flathub org.chromium.Chromium
 
 # install gnome shell extension mangager - for extension hide-cursor@elcste.com
-apt install gnome-shell-extension-manager
+apt -y install gnome-shell-extension-manager
 
 ###########################################################################
 # startup-scripts for browsers
