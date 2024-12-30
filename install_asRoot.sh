@@ -92,6 +92,9 @@ output_file="/signage/firefox_script.sh"
 cat << 'EOF' > $output_file
 #!/bin/bash
 
+# wait 10 seconds for WiFi connection
+sleep 10
+
 # Define the startup URL
 URL="www.enterstartupURLhere.com"
 
@@ -111,6 +114,9 @@ output_file="/signage/chromium_script.sh"
 cat << 'EOF' > $output_file
 #!/bin/bash
 
+# wait 10 seconds for WiFi connection
+sleep 10
+
 # Define the startup URL
 URL="www.enterstartupURLhere.com"
 
@@ -128,6 +134,9 @@ output_file="/signage/chrome_script.sh"
 # Write the content to the file
 cat << 'EOF' > $output_file
 #!/bin/bash
+
+# wait 10 seconds for WiFi connection
+sleep 10
 
 # Define the startup URL
 URL="www.enterstartupURLhere.com"
