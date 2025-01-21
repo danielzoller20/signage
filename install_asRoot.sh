@@ -44,6 +44,28 @@ else
   echo "Configuration file not found at $CONFIG_FILE."
 fi
 
+
+## hide software updater
+
+# Path to the update-notifier.desktop file
+FILE="/etc/xdg/autostart/update-notifier.desktop"
+
+# Check if the file exists
+if [ -f "$FILE" ]; then
+    # Comment out the Exec line
+    sudo sed -i 's|^Exec=update-notifier|#Exec=update-notifier|' "$FILE"
+    
+    # Check if Hidden line already exists, if not, add it
+    if ! grep -q "^Hidden=true" "$FILE"; then
+        echo "Hidden=true" | sudo tee -a "$FILE" > /dev/null
+    fi
+
+    echo "Update notifier configuration updated successfully."
+else
+    echo "File $FILE does not exist."
+fi
+
+
 ## add CronJob for updates at night
 
 # Define the cron job schedule and update /shutdown command for 20.45 mon-fri
